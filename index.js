@@ -23,9 +23,9 @@ module.exports = (robot) => {
     const repo = context.payload.repository.name
     const number = context.payload.number
 
-    const {commentLimit, commentMessage, skipBranchMatching} = await context.config('eslint-disable-bot.yml', {
+    const {commentLimit, eslintCommentMessage, skipBranchMatching} = await context.config('eslint-disable-bot.yml', {
       commentLimit: 10,
-      commentMessage: 'Please don\'t disable eslint rules :pray:',
+      eslintCommentMessage: 'Please don\'t disable eslint rules :pray:',
       skipBranchMatching: null
     })
 
@@ -69,7 +69,7 @@ module.exports = (robot) => {
               comments.push({
                 path: file.filename,
                 position: currentPosition,
-                body: commentMessage
+                body: eslintCommentMessage
               })
             }
           }

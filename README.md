@@ -20,7 +20,7 @@ You don't need any configuration for this to work in your project but you can cu
 # Change this to set the number of comments the watcher should comment on a given PR.
 commentLimit: 10
 # The message the bot will post on any lines containing a eslint disable comment.
-commentMessage: Please don't disable eslint rules :pray:
+eslintCommentMessage: Please don't disable eslint rules :pray:
 # A optional regular expression that will match against the branch name and not comment on it if it matches.
 skipBranchMatching: null
 ```
