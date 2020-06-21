@@ -10,12 +10,12 @@
     "test": "jest && standard"
   },
   "dependencies": {
-    "probot": "^5.0.0"
+    "probot": "^9.11.5"
   },
   "devDependencies": {
-    "jest": "^21.2.1",
-    "smee-client": "^1.0.1",
-    "standard": "^10.0.3"
+    "jest": "^26.0.1",
+    "smee-client": "^1.1.0",
+    "standard": "^14.3.4"
   },
   "engines": {
     "node" : "9.6.0"
