@@ -23,9 +23,11 @@ module.exports = (robot) => {
     const repo = context.payload.repository.name
     const number = context.payload.number
 
-    const {commentLimit, eslintCommentMessage, skipBranchMatching} = await context.config('eslint-disable-bot.yml', {
+    const {commentLimit, eslintCommentMessage, phpcsCommentMessage, jsHintCommentMessage, skipBranchMatching} = await context.config('eslint-disable-bot.yml', {
       commentLimit: 10,
       eslintCommentMessage: 'Please don\'t disable eslint rules :pray:',
+      phpcsCommentMessage: 'Please don\'t disable or ignore phpcs rules :pray:',
+      jshintCommentMessage: 'Please don\'t disable jshint rules :pray:',
       skipBranchMatching: null
     })
 
@@ -70,6 +72,24 @@ module.exports = (robot) => {
                 path: file.filename,
                 position: currentPosition,
                 body: eslintCommentMessage
+              })
+            }
+          }
+          if (line.startsWith('+') && line.includes('phpcs:')) {
+            if (!linesCommentedOnByBot.includes(currentPosition)) {
+              comments.push({
+                path: file.filename,
+                position: currentPosition,
+                body: phpcsCommentMessage
+              })
+            }
+          }
+          if (line.startsWith('+') && line.includes('jshint ignore')) {
+            if (!linesCommentedOnByBot.includes(currentPosition)) {
+              comments.push({
+                path: file.filename,
+                position: currentPosition,
+                body: jshintCommentMessage
               })
             }
           }
