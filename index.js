@@ -56,7 +56,7 @@ module.exports = (robot) => {
 
       for (const file of files.data) {
         let currentPosition = 0
-        if (!file.filename.endsWith('.js') && !file.filename.endsWith('.php')) return
+        if (!file.filename.endsWith('.js') && !file.filename.endsWith('.php')) continue
 
         // In order to not spam the PR with comments we'll stop after a certain number of comments
         if (comments.length > commentLimit) return
