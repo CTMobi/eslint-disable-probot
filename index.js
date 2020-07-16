@@ -2,10 +2,10 @@ async function getAllLinesCommentedOnByBot (context, owner, repo, number) {
   let linesCommentedOnByBot = []
   let page = 0
   while (true) {
-    const existingComments = await context.github.pullRequests.getComments({
+    const existingComments = await context.github.issues.listComments({
       owner,
       repo,
-      number,
+      issue_number: number,
       page,
       per_page: 100
     })
@@ -45,10 +45,10 @@ module.exports = (robot) => {
     const comments = []
     let page = 0
     while (true) {
-      const files = await context.github.pullRequests.getFiles({
+      const files = await context.github.pulls.listFiles({
         owner,
         repo,
-        number,
+        pull_number: number,
         headers: {accept: 'application/vnd.github.v3.diff'},
         page,
         per_page: 100
@@ -104,10 +104,10 @@ module.exports = (robot) => {
 
     // Only post a review if we have some comments
     if (comments.length) {
-      await context.github.pullRequests.createReview({
+      await context.github.pulls.createReview({
         owner,
         repo,
-        number,
+        pull_number: number,
         commit_id: context.payload.pull_request.head.sha,
         event: 'REQUEST_CHANGES',
         comments
